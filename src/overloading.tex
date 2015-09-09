@@ -12,7 +12,7 @@ Modify paragraph 1 to allow overloading based on constraints.
 When two or more different declarations are specified for a single name 
 in the same scope, that name is said to be overloaded. By extension, two 
 declarations in the same scope that declare the same name but with
-different types \added{or different associated constraints (Clause~\ref{temp})}
+different types \added{or different associated constraints (\ref{temp.constr.decl})}
 are called \defn{overloaded declarations}. Only function and function 
 template declarations can be overloaded; variable and type declarations 
 cannot be overloaded.
@@ -33,7 +33,7 @@ document.
 \enternote
 As specified in \ref{dcl.fct}, function declarations that have equivalent 
 parameter declarations \added{and associated constraints, if any 
-(Clause~\ref{temp})}, declare the same function and therefore cannot be 
+(\ref{temp.constr.decl})}, declare the same function and therefore cannot be 
 overloaded: ...
 \exitnote
 \end{quote}
@@ -52,7 +52,7 @@ example in the original text is omitted in this document.
 Two function declarations of the same name refer to the same function if 
 they are in the same scope and have equivalent parameter declarations 
 (\ref{over.load}) \added{and equivalent associated constraints, if any 
-(Clause~\ref{temp})}.
+(\ref{temp.constr.decl})}.
 \end{quote}
 
 
@@ -81,7 +81,7 @@ sequences and associated constraints for the best fit
 (\ref{over.match.best}).
 %
 The selection of viable functions considers \added{associated constraints, 
-if any (Clause~\ref{temp}), and} relationships between arguments and function 
+if any (\ref{temp.constr.decl}), and} relationships between arguments and function 
 parameters other than the ranking of conversion sequences.
 \end{quote}
 
@@ -92,8 +92,8 @@ subsequent paragraph to account for the insertion.
 \begin{quote}
 \setcounter{Paras}{2}
 \pnum
-\added{Second, for a function to be viable, if it has associated constraints
-(Clause~\ref{temp}), those constraints shall be satisfied (\ref{temp.constr}).}
+\added{Second, for a function to be viable, if it has associated constraints, 
+those constraints shall be satisfied (\ref{temp.constr.decl}).}
 
 \pnum
 \removed{Second}\added{Third}, for \tcode{F} to be a viable function\ldots
@@ -106,7 +106,7 @@ subsequent paragraph to account for the insertion.
 
 Modify the last item in the list in paragraph 1 and extend it with a final
 comparison based on the associated constraints of those functions. Note that 
-the preceding (unmodified) items in the original document are elided in this
+the preceding (unmodified) items in the \Cpp Standard are elided in this
 document.
 
 \begin{quote}
@@ -140,8 +140,8 @@ taken.
 \begin{quote}
 \setcounter{Paras}{3}
 \pnum
-\added{Eliminate from the set of selected functions all those whose constraints
-are not satisfied (\ref{temp.constr}).}
+\added{Eliminate from the set of selected functions all those whose 
+associated constraints are not satisfied (\ref{temp.constr.decl}).}
 %
 \removed{If more than one function is selected}
 \added{If more than one function in the set remains}, 
@@ -166,6 +166,7 @@ selected function.
 Add the following example at the end of paragraph 5.
 
 \begin{quote}
+\begin{addedblock}
 \enterexample
 \begin{codeblock}
 void f();                // \#1
@@ -173,8 +174,9 @@ void f() requires true ; // \#2
 void g() requires false;
 void g() requires false and true;
 
-void (*pf)() = &amp;f;         // selects \#2
-void (*pg)() = &amp;g;         // error: no matching function
+void (*pf)() = &f;         // selects \#2
+void (*pg)() = &g;         // error: no matching function
 \end{codeblock}
 \exitexample
+\end{addedblock}
 \end{quote}
